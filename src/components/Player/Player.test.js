@@ -1,7 +1,6 @@
 import React from 'react';
 import Player from './Player';
 import { shallow } from 'enzyme';
-import { exportAllDeclaration } from '@babel/types';
 
 it('renders without crashing', () => {
   shallow(<Player />);
