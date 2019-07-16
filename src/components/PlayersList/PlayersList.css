@@ -1,0 +1,5 @@
+.PlayersList {
+    list-style: none;
+    border: 5px solid black;
+    padding: 0;
+}
