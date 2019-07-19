@@ -5,30 +5,30 @@ import App from './App';
 import PlayersList from './components/PlayersList/PlayersList';
 import AddPlayer from './components/AddPlayer/AddPlayer';
 
-const testPlayers = [
-  {
-      name: 'Kasia',
-      score: 5
-  },
-  {
-      name: 'Basia',
-      score: 0
-  }
-];
-
 it('renders without crashing', () => {
   shallow(<App />);
 });
 
 it('should update player score', () => {
+  const players = [
+    {
+        name: 'Kasia',
+        score: 5
+    },
+    {
+        name: 'Basia',
+        score: 0
+    }
+  ];
+
   const appComponent = shallow(<App />);
-  appComponent.setState({ testPlayers });
+  appComponent.setState({ players });
   const onScoreUpdate = appComponent.find(PlayersList).prop('onScoreUpdate');
 
   onScoreUpdate(0, 5);
-  const playersAfterUpdate = appComponent.state().testPlayers;
+  const playersAfterUpdate = appComponent.state().players;
 
-  expect(playersAfterUpdate[0].score).toEqual(5);
+  expect(playersAfterUpdate[0].score).toEqual(10);
 });
 
 it('should create a player', () => {
@@ -44,12 +44,23 @@ it('should create a player', () => {
 });
 
 it('should remove player from an array', () => {
+  const players = [
+    {
+        name: 'Kasia',
+        score: 5
+    },
+    {
+        name: 'Basia',
+        score: 0
+    }
+  ];
+
   const appComponent = shallow(<App />);
-  appComponent.setState({ testPlayers });
+  appComponent.setState({ players });
   const onPlayerRemove = appComponent.find(PlayersList).prop('onPlayerRemove');
 
   onPlayerRemove(0);
-  const playersAfterUpdate = appComponent.state().testPlayers;
+  const playersAfterUpdate = appComponent.state('players');
 
   expect(playersAfterUpdate.length).toEqual(1);
   expect(playersAfterUpdate[0].name).toEqual('Basia');
