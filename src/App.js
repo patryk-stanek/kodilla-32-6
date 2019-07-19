@@ -9,14 +9,14 @@ class App extends Component {
 
     this.state = {
       players: [
-        {
-            name: 'Kasia',
-            score: 5
-        },
-        {
-            name: 'Basia',
-            score: 0
-        }
+        // {
+        //     name: 'Kasia',
+        //     score: 5
+        // },
+        // {
+        //     name: 'Basia',
+        //     score: 0
+        // }
       ]
     }
   }
@@ -42,10 +42,16 @@ class App extends Component {
     })
   }
 
+  onPlayerRemove = (playerId) => {
+    const newState = this.state.players.filter((player, index) => index !== playerId);
+    
+    this.setState({players: newState});
+  }
+
   render() {
     return (
       <div className='App'>
-        <PlayersList players={this.state.players} onScoreUpdate={this.onScoreUpdate}/>
+        <PlayersList players={this.state.players} onScoreUpdate={this.onScoreUpdate} onPlayerRemove={this.onPlayerRemove}/>
         <AddPlayer onPlayerAdd={this.onPlayerAdd} />
       </div>
     );
